@@ -37,8 +37,7 @@
 
                 <!-- Page Heading -->
                 <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-                <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-                    For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+                <a href="/admin/products/create">Create New Product</a>
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
@@ -61,6 +60,7 @@
                                     <th>Create At</th>
                                     <th>Update At</th>
                                     <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
@@ -77,24 +77,29 @@
                                     <th>Create At</th>
                                     <th>Update At</th>
                                     <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
                                 <%for (Product pd : products){%>
                                 <tr>
-                                    <th><%=pd.getId()%>></th>
-                                    <th><%=pd.getName()%>></th>
-                                    <th><%=pd.getPrice()%>></th>
-                                    <th><%=pd.getContent()%>></th>
-                                    <th><%=pd.getSize()%>></th>
-                                    <th><%=pd.getId()%>></th>
-                                    <th><%=pd.getQty()%>></th>
-                                    <th><%=pd.getSku()%>></th>
-                                    <th><%=pd.getCategory()%>></th>
-                                    <th><%=pd.getTag()%>></th>
-                                    <th><%=pd.getCreatedAt()%>></th>
-                                    <th><%=pd.getUpdatedAt()%>></th>
-                                    <th><%=pd.getStatus()%>></th>
+                                    <th><%=pd.getId()%></th>
+                                    <th><%=pd.getName()%></th>
+                                    <th><%=pd.getPrice()%></th>
+                                    <th><%=pd.getContent()%></th>
+                                    <th><%=pd.getSize()%></th>
+                                    <th><%=pd.getQty()%></th>
+                                    <th><%=pd.getSku()%></th>
+                                    <th><%=pd.getCategory()%></th>
+                                    <th><%=pd.getTag()%></th>
+                                    <th><%=pd.getCreatedAt()%></th>
+                                    <th><%=pd.getUpdatedAt()%></th>
+                                    <th><%=pd.getStatus()%></th>
+                                    <th>
+                                        <a href="/admin/products/detail?id=<%=pd.getId()%>"><i class="fas fa-arrow-circle-right"></i></a>
+                                        <a href="/admin/products/edit?id=<%=pd.getId()%>"><i class="fa fa-pencil-alt"></i></a>
+                                        <a href="/admin/products/delete?id=<%=pd.getId()%>" onclick="return confirm('Are you sure?')"><i class="fas fa-trash"></i></a>
+                                    </th>
                                 </tr>
                                 <%}%>
                                 </tbody>

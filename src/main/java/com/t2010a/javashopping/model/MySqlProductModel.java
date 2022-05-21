@@ -84,7 +84,7 @@ public class MySqlProductModel implements ProductModel{
             String sqlQuery = "select * from products where status = ? and id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
             preparedStatement.setInt(1,1);
-            preparedStatement.setString(1,id);
+            preparedStatement.setString(2,id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 String name = resultSet.getString("name");
