@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 public class CreateProductServlet extends HttpServlet {
     private ProductModel productModel;
@@ -40,6 +41,41 @@ public class CreateProductServlet extends HttpServlet {
         String category = req.getParameter("category");
         String tag = req.getParameter("tag");
         Product product = new Product(id, name, price, content,size,qty,sku,category,tag );
+
+        HashMap<String,String> errors = new HashMap<>();
+        if (id == null || id.length() == 0){
+            errors.put("id","Please enter id");
+        }
+        if (name == null || name.length() == 0){
+            errors.put("name","Please enter name");
+        }
+        if (price == 0){
+            errors.put("price","Please enter price");
+        }
+        if (content == null || content.length() == 0){
+            errors.put("content","Please enter content");
+        }
+        if (size == null || size.length() == 0){
+            errors.put("size","Please enter size");
+        }
+        if (qty == 0){
+            errors.put("qty","Please enter qty");
+        }
+        if (sku == 0){
+            errors.put("sku","Please enter sku");
+        }
+        if (category == null || category.length() == 0){
+            errors.put("category","Please enter category");
+        }
+        if (tag == null || tag.length() == 0){
+            errors.put("tag","Please enter tag");
+        }
+        if (errors.size() > 0){
+            req.setAttribute("product",product);
+            req.setAttribute("action",1);
+            req.setAttribute("errors",errors);
+            req.getRequestDispatcher("/admin/products/form.jsp").forward(req,resp);
+        }
 
         if (productModel.save(product) != null){
             resp.sendRedirect("/admin/products/list");

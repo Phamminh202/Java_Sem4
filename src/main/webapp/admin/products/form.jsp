@@ -1,4 +1,5 @@
-<%@ page import="com.t2010a.javashopping.entity.Product" %><%--
+<%@ page import="com.t2010a.javashopping.entity.Product" %>
+<%@ page import="java.util.HashMap" %><%--
   Created by IntelliJ IDEA.
   User: PhạmMinh
   Date: 21/05/2022
@@ -9,9 +10,13 @@
 <%
   Product product = (Product) request.getAttribute("product");
   int action = (int) request.getAttribute("action");
+  HashMap<String,String> errors = (HashMap<String, String>) request.getAttribute("errors");
   String url = "/admin/products/create";
   if(action == 2){
     url = "/admin/products/edit";
+  }
+  if (errors == null){
+    errors = new HashMap<>();
   }
 %>
 <!DOCTYPE html>
@@ -52,38 +57,65 @@
                 <div class="form-group">
                   <label for="id">Id</label>
                   <input type="text" class="form-control" id="id" name="id" placeholder="Enter id" value="<%=product.getId()%>" <%=action == 2 ? "readonly":""%>>
+                  <%if (errors.containsKey("id")){%>
+                  <span class="text-danger">* <%=errors.get("id")%></span>
+                  <%}%>
                 </div>
                 <div class="form-group">
                   <label for="name">Name</label>
                   <input type="text" class="form-control" id="name" name="name" placeholder="Enter name"  value="<%=product.getName()%>">
+                  <%if (errors.containsKey("name")){%>
+                  <span class="text-danger">* <%=errors.get("name")%></span>
+                  <%}%>
                 </div>
                 <div class="form-group">
                   <label for="price">Price</label>
                   <input type="number" class="form-control" id="price" name="price" placeholder="Enter price" value="<%=product.getPrice()%>">
+                  <%if (errors.containsKey("price")){%>
+                  <span class="text-danger">* <%=errors.get("price")%></span>
+                  <%}%>
                 </div>
                 <div class="form-group">
                   <label for="contents">Content</label>
                   <input type="text" class="form-control" id="contents" name="content" placeholder="Enter content" value="<%=product.getContent()%>">
+                  <%if (errors.containsKey("content")){%>
+                  <span class="text-danger">* <%=errors.get("content")%></span>
+                  <%}%>
                 </div>
                 <div class="form-group">
                   <label for="size">Size</label>
                   <input type="text" class="form-control" id="size" name="size" placeholder="Enter size" value="<%=product.getSize()%>">
+                  <%if (errors.containsKey("size")){%>
+                  <span class="text-danger">* <%=errors.get("size")%></span>
+                  <%}%>
                 </div>
                 <div class="form-group">
                   <label for="qty">Quantity</label>
                   <input type="number" class="form-control" id="qty" name="qty" placeholder="Enter quantity" value="<%=product.getQty()%>">
+                  <%if (errors.containsKey("qty")){%>
+                  <span class="text-danger">* <%=errors.get("qty")%></span>
+                  <%}%>
                 </div>
                 <div class="form-group">
                   <label for="sku">Sku</label>
                   <input type="number" class="form-control" id="sku" name="sku" placeholder="Enter sku" value="<%=product.getSku()%>">
+                  <%if (errors.containsKey("sku")){%>
+                  <span class="text-danger">* <%=errors.get("sku")%></span>
+                  <%}%>
                 </div>
                 <div class="form-group">
                 <label for="category">Category</label>
                 <input type="text" class="form-control" id="category" name="category" placeholder="Enter category" value="<%=product.getCategory()%>">
+                  <%if (errors.containsKey("category")){%>
+                  <span class="text-danger">* <%=errors.get("category")%></span>
+                  <%}%>
               </div>
                 <div class="form-group">
                   <label for="tag">Tag</label>
                   <input type="text" class="form-control" id="tag" name="tag" placeholder="Enter tag" value="<%=product.getTag()%>">
+                  <%if (errors.containsKey("tag")){%>
+                  <span class="text-danger">* <%=errors.get("tag")%></span>
+                  <%}%>
                 </div>
                 <!-- /.form group -->
                 <div class="form-check">
