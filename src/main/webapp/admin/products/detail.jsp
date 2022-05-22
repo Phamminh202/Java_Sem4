@@ -12,81 +12,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <jsp:include page="../includes/head.jsp"></jsp:include>
-<body id="page-top">
-
-<!-- Page Wrapper -->
-<div id="wrapper">
-
-    <!-- Sidebar -->
-    <jsp:include page="../includes/sidebar.jsp"></jsp:include>
-    <!-- End of Sidebar -->
-
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
+<body>
+<div id="app">
+    <div class="main-wrapper main-wrapper-1">
+        <jsp:include page="../includes/navbar.jsp"></jsp:include>
+        <jsp:include page="../includes/sidebar.jsp"></jsp:include>
         <!-- Main Content -->
-        <div id="content">
-
-            <!-- Topbar -->
-            <jsp:include page="../includes/topbar.jsp"></jsp:include>
-            <!-- End of Topbar -->
-
-            <!-- Begin Page Content -->
-            <!-- Default box -->
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Product Detail</h3>
+        <div class="main-content">
+            <section class="section">
+                <div class="section-header">
+                    <h1>Detail Product</h1>
                 </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
-                            <h3 class="text-primary"></i><%=product.getName()%></h3>
-                            <p class="text-muted"><%=product.getContent()%></p>
-                            <br>
-                            <div class="text-muted">
-                                <p class="text-sm">Price
-                                    <b class="d-block"><%=product.getPrice()%></b>
-                                </p>
-                                <p class="text-sm">Quantity
-                                    <b class="d-block"><%=product.getQty()%></b>
-                                </p>
+                <div class="section-body">
+                    <div class="row mt-sm-4">
+                        <div class="col-12 col-md-12 col-lg-10">
+                            <div class="card profile-widget">
+                                <div class="profile-widget-header">
+                                    <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle profile-widget-picture">
+                                    <div class="profile-widget-items">
+                                        <div class="profile-widget-item">
+                                            <div class="profile-widget-item-label">Posts</div>
+                                            <div class="profile-widget-item-value">187</div>
+                                        </div>
+                                        <div class="profile-widget-item">
+                                            <div class="profile-widget-item-label">Followers</div>
+                                            <div class="profile-widget-item-value">6,8K</div>
+                                        </div>
+                                        <div class="profile-widget-item">
+                                            <div class="profile-widget-item-label">Following</div>
+                                            <div class="profile-widget-item-value">2,1K</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="profile-widget-description">
+                                    <div class="profile-widget-name"><%=product.getName()%> <div class="text-muted d-inline font-weight-normal"><div class="slash"></div> <%=product.getCategory()%></div></div>
+                                    <%=product.getContent()%>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <div class="font-weight-bold mb-2">Follow Ujang On</div>
+                                    <a href="#" class="btn btn-social-icon btn-facebook mr-1">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-social-icon btn-twitter mr-1">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-social-icon btn-github mr-1">
+                                        <i class="fab fa-github"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-social-icon btn-instagram">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </div>
                             </div>
-
-                            <h5 class="mt-5 text-muted">Other</h5>
-                            <ul class="list-unstyled">
-                                <li>
-                                    <p class="text-secondary">Size: <%=product.getSize()%></p>
-                                </li>
-                                <li>
-                                    <p class="text-secondary">Sku: <%=product.getSku()%></p>
-                                </li>
-                                <li>
-                                    <p class="text-secondary">Category: <%=product.getCategory()%></p>
-                                </li>
-                                <li>
-                                    <p class="text-secondary">Tag: <%=product.getTag()%></p>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-            <!-- /.container-fluid -->
-
+            </section>
         </div>
-        <!-- End of Main Content -->
-
-        <!-- Footer -->
         <jsp:include page="../includes/footer.jsp"></jsp:include>
-        <!-- End of Footer -->
-
     </div>
-    <!-- End of Content Wrapper -->
-
 </div>
-<!-- End of Page Wrapper -->
 
 <jsp:include page="../includes/script.jsp"></jsp:include>
 

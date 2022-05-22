@@ -1,50 +1,56 @@
+<!-- Start GA -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+    gtag('config', 'UA-94034622-3');
+</script>
 
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"><small>x</small></span>
-                </button>
-            </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- General JS Scripts -->
+<script src="../assets/modules/jquery.min.js"></script>
+<script src="../assets/modules/popper.js"></script>
+<script src="../assets/modules/tooltip.js"></script>
+<script src="../assets/modules/bootstrap/js/bootstrap.min.js"></script>
+<script src="../assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="../assets/modules/moment.min.js"></script>
+<script src="../assets/js/stisla.js"></script>
 
+<!-- JS Libraies -->
+<script src="../assets/modules/simple-weather/jquery.simpleWeather.min.js"></script>
+<script src="../assets/modules/chart.min.js"></script>
+<script src="../assets/modules/jqvmap/dist/jquery.vmap.min.js"></script>
+<script src="../assets/modules/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+<script src="../assets/modules/summernote/summernote-bs4.js"></script>
+<script src="../assets/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
 
-<!-- Bootstrap core JavaScript-->
-<script src="../content/vendor/jquery/jquery.min.js"></script>
-<script src="../content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Page Specific JS File -->
+<script src="../assets/js/page/index-0.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="../content/vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- Template JS File -->
+<script src="../assets/js/scripts.js"></script>
+<script src="../assets/js/custom.js"></script>
 
-<!-- Custom scripts for all pages-->
-<script src="../content/js/sb-admin-2.min.js"></script>
+<!-- JS Libraies -->
+<script src="../assets/modules/datatables/datatables.min.js"></script>
+<script src="../assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script src="../assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
+<script src="../assets/modules/jquery-ui/jquery-ui.min.js"></script>
 
-<!-- Page level plugins -->
-<script src="../content/vendor/chart.js/Chart.min.js"></script>
+<!-- Page Specific JS File -->
+<script src="../assets/js/page/modules-datatables.js"></script>
 
-<!-- Page level custom scripts -->
-<script src="../content/js/demo/chart-area-demo.js"></script>
-<script src="../content/js/demo/chart-pie-demo.js"></script>
+<!-- JS Libraies -->
+<script src="../assets/modules/cleave-js/dist/cleave.min.js"></script>
+<script src="../assets/modules/cleave-js/dist/addons/cleave-phone.us.js"></script>
+<script src="../assets/modules/jquery-pwstrength/jquery.pwstrength.min.js"></script>
+<script src="../assets/modules/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="../assets/modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+<script src="../assets/modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+<script src="../assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+<script src="../assets/modules/select2/dist/js/select2.full.min.js"></script>
+<script src="../assets/modules/jquery-selectric/jquery.selectric.min.js"></script>
 
-<!-- Page level plugins -->
-<script src="../content/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="../content/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="../content/js/demo/datatables-demo.js"></script>
+<!-- Page Specific JS File -->
+<script src="../assets/js/page/forms-advanced-forms.js"></script>

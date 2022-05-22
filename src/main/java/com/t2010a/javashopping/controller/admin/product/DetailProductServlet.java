@@ -30,20 +30,6 @@ public class DetailProductServlet extends HttpServlet {
             req.getRequestDispatcher("/admin/errors/404.jsp").forward(req, resp);
         } else {
             HttpSession session = req.getSession();
-            //ArrayList<Product> recentView = (ArrayList<Product>) session.getAttribute("recentView");
-            /*if (recentView == null){
-                recentView = new ArrayList<Customer>();
-            }
-            boolean exists = false;
-            for (int i = 0; i < recentView.size();i++){
-                if (recentView.get(i).getId().equals(customer.getId()));{
-                    exists = true;
-                }
-            }
-            if (!exists){
-                recentView.add(customer);
-                session.setAttribute("recentView",recentView);
-            }*/
             req.setAttribute("product", product);
             req.getRequestDispatcher("/admin/products/detail.jsp").forward(req, resp);
         }

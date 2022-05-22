@@ -8,55 +8,89 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
-<jsp:include page="../includes/head.jsp"></jsp:include>
-<body id="page-top">
 
-<!-- Page Wrapper -->
-<div id="wrapper">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>500 &mdash; Stisla</title>
 
-  <!-- Sidebar -->
-  <jsp:include page="../includes/sidebar.jsp"></jsp:include>
-  <!-- End of Sidebar -->
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="assets/modules/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/modules/fontawesome/css/all.min.css">
 
-  <!-- Content Wrapper -->
-  <div id="content-wrapper" class="d-flex flex-column">
+  <!-- CSS Libraries -->
 
-    <!-- Main Content -->
-    <div id="content">
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <!-- Start GA -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-      <!-- Topbar -->
-      <jsp:include page="../includes/topbar.jsp"></jsp:include>
-      <!-- End of Topbar -->
+    gtag('config', 'UA-94034622-3');
+  </script>
+  <!-- /END GA --></head>
 
-      <!-- Begin Page Content -->
-      <div class="container-fluid">
-
-        <!-- 404 Error Text -->
-        <div class="text-center">
-          <div class="error mx-auto" data-text="404">500</div>
-          <p class="lead text-gray-800 mb-5"><%=request.getAttribute("message")%></p>
-          <p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
-          <a href="/admin/home">&larr; Back to Dashboard</a>
+<body>
+<div id="app">
+  <section class="section">
+    <div class="container mt-5">
+      <div class="page-error">
+        <div class="page-inner">
+          <h1>500</h1>
+          <div class="page-description">
+            <%=request.getAttribute("message")%>
+          </div>
+          <div class="page-search">
+            <form>
+              <div class="form-group floating-addon floating-addon-not-append">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="fas fa-search"></i>
+                    </div>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Search">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary btn-lg">
+                      Search
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="mt-3">
+              <a href="index.html">Back to Home</a>
+            </div>
+          </div>
         </div>
-
       </div>
-      <!-- /.container-fluid -->
-
+      <div class="simple-footer mt-5">
+        Copyright &copy; Stisla 2018
+      </div>
     </div>
-    <!-- End of Main Content -->
-
-    <!-- Footer -->
-    <jsp:include page="../includes/footer.jsp"></jsp:include>
-    <!-- End of Footer -->
-
-  </div>
-  <!-- End of Content Wrapper -->
-
+  </section>
 </div>
-<!-- End of Page Wrapper -->
 
-<jsp:include page="../includes/script.jsp"></jsp:include>
+<!-- General JS Scripts -->
+<script src="assets/modules/jquery.min.js"></script>
+<script src="assets/modules/popper.js"></script>
+<script src="assets/modules/tooltip.js"></script>
+<script src="assets/modules/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/modules/nicescroll/jquery.nicescroll.min.js"></script>
+<script src="assets/modules/moment.min.js"></script>
+<script src="assets/js/stisla.js"></script>
 
+<!-- JS Libraies -->
+
+<!-- Page Specific JS File -->
+
+<!-- Template JS File -->
+<script src="assets/js/scripts.js"></script>
+<script src="assets/js/custom.js"></script>
 </body>
 
 </html>

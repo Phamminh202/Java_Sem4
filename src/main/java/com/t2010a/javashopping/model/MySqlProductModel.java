@@ -1,6 +1,7 @@
 package com.t2010a.javashopping.model;
 
 import com.t2010a.javashopping.entity.Product;
+import com.t2010a.javashopping.entity.myenum.ProductStatus;
 import com.t2010a.javashopping.util.ConnectionHelper;
 
 import java.sql.Connection;
@@ -18,21 +19,20 @@ public class MySqlProductModel implements ProductModel{
         try {
             Connection connection = ConnectionHelper.getConnection();
             String sqlQuery = "insert into products "+
-                    "(id,name,price,content,size,qty,sku,category,tag,createdAt,updatedAt,status)"+
+                    "(id,name,image,price,qty,color_id,content,category_id,createdAt,updatedAt,status)"+
                     "value "+"(?,?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
             preparedStatement.setString(1,product.getId());
             preparedStatement.setString(2,product.getName());
-            preparedStatement.setDouble(3,product.getPrice());
-            preparedStatement.setString(4,product.getContent());
-            preparedStatement.setString(5,product.getSize());
-            preparedStatement.setInt(6,product.getQty());
-            preparedStatement.setInt(7,product.getSku());
-            preparedStatement.setString(8,product.getCategory());
-            preparedStatement.setString(9,product.getTag());
-            preparedStatement.setString(10,product.getCreatedAt().toString());
-            preparedStatement.setString(11,product.getUpdatedAt().toString());
-            preparedStatement.setInt(12,product.getStatus());
+            preparedStatement.setString(3,product.getImage());
+            preparedStatement.setDouble(4,product.getPrice());
+            preparedStatement.setInt(5,product.getQty());
+            preparedStatement.setInt(6,product.getColor_id());
+            preparedStatement.setString(7,product.getContent());
+            preparedStatement.setInt(8,product.getCategory_id());
+            preparedStatement.setString(9,product.getCreatedAt().toString());
+            preparedStatement.setString(10,product.getUpdatedAt().toString());
+            preparedStatement.setInt(11,product.getStatus().getValue());
             System.out.println("Connection success!");
             preparedStatement.execute();
             return product;
@@ -55,17 +55,19 @@ public class MySqlProductModel implements ProductModel{
             while (resultSet.next()){
                 String id = resultSet.getString("id");
                 String name = resultSet.getString("name");
+                String image = resultSet.getString("image");
                 double price = resultSet.getDouble("price");
-                String content = resultSet.getString("content");
-                String size = resultSet.getString("size");
                 int qty = resultSet.getInt("qty");
-                int sku = resultSet.getInt("sku");
-                String category = resultSet.getString("category");
-                String tag = resultSet.getString("tag");
+                int color_id = Integer.parseInt(resultSet.getString("color_id"));
+                String content = resultSet.getString("content");
+                int category_id = Integer.parseInt(resultSet.getString("category_id"));
                 LocalDateTime createdAt = LocalDateTime.ofInstant(resultSet.getTimestamp("createdAt").toInstant(), ZoneId.systemDefault());
                 LocalDateTime updatedAt = LocalDateTime.ofInstant(resultSet.getTimestamp("createdAt").toInstant(), ZoneId.systemDefault());
-                int status = resultSet.getInt("status");
-                Product product = new Product(id,name,price,content,size,qty,sku,category,tag,createdAt,updatedAt,status);
+                int intstatus = resultSet.getInt("status");
+                Product product = new Product(id,name,image,price,qty,color_id,content,category_id);
+                product.setCreatedAt(createdAt);
+                product.setUpdatedAt(updatedAt);
+                product.setStatus(ProductStatus.of(intstatus));
                 list.add(product);
             }
             preparedStatement.execute();
@@ -88,17 +90,18 @@ public class MySqlProductModel implements ProductModel{
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 String name = resultSet.getString("name");
+                String image = resultSet.getString("image");
                 double price = resultSet.getDouble("price");
-                String content = resultSet.getString("content");
-                String size = resultSet.getString("size");
                 int qty = resultSet.getInt("qty");
-                int sku = resultSet.getInt("sku");
-                String category = resultSet.getString("category");
-                String tag = resultSet.getString("tag");
+                String size = resultSet.getString("color_id");
+                String content = resultSet.getString("content");
+                String category = resultSet.getString("category_id");
                 LocalDateTime createdAt = LocalDateTime.ofInstant(resultSet.getTimestamp("createdAt").toInstant(), ZoneId.systemDefault());
                 LocalDateTime updatedAt = LocalDateTime.ofInstant(resultSet.getTimestamp("createdAt").toInstant(), ZoneId.systemDefault());
-                int status = resultSet.getInt("status");
-                product = new Product(id,name,price,content,size,qty,sku,category,tag,createdAt,updatedAt,status);
+                int intstatus = resultSet.getInt("status");
+                product.setCreatedAt(createdAt);
+                product.setUpdatedAt(updatedAt);
+                product.setStatus(ProductStatus.of(intstatus));
             }
             preparedStatement.execute();
 
@@ -113,21 +116,20 @@ public class MySqlProductModel implements ProductModel{
         try {
             Connection connection = ConnectionHelper.getConnection();
             String sqlQuery = "update products "+
-                    "set id = ?,name = ?,price = ?,content = ?,size = ?,qty = ?,sku = ?,category = ?,tag = ? , createdAt = ?,updatedAt = ? ,status = ? where  id =?";
+                    "set id = ?,name = ?,image = ?,price = ?,qty = ?,color_id = ?,content = ?,category_id = ?, createdAt = ?,updatedAt = ? ,status = ? where  id =?";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
             preparedStatement.setString(1,product.getId());
             preparedStatement.setString(2,product.getName());
-            preparedStatement.setDouble(3,product.getPrice());
-            preparedStatement.setString(4,product.getContent());
-            preparedStatement.setString(5,product.getSize());
-            preparedStatement.setInt(6,product.getQty());
-            preparedStatement.setInt(7,product.getSku());
-            preparedStatement.setString(8,product.getCategory());
-            preparedStatement.setString(9,product.getTag());
-            preparedStatement.setString(10,product.getCreatedAt().toString());
-            preparedStatement.setString(11,product.getUpdatedAt().toString());
-            preparedStatement.setInt(12,product.getStatus());
-            preparedStatement.setString(13,id);
+            preparedStatement.setString(3,product.getImage());
+            preparedStatement.setDouble(4,product.getPrice());
+            preparedStatement.setInt(5,product.getQty());
+            preparedStatement.setInt(6,product.getColor_id());
+            preparedStatement.setString(7,product.getContent());
+            preparedStatement.setInt(8,product.getCategory_id());
+            preparedStatement.setString(9,product.getCreatedAt().toString());
+            preparedStatement.setString(10,product.getUpdatedAt().toString());
+            preparedStatement.setInt(11,product.getStatus().getValue());
+            preparedStatement.setString(12,id);
             System.out.println("Connection success!");
             preparedStatement.execute();
             return product;
@@ -145,7 +147,7 @@ public class MySqlProductModel implements ProductModel{
             String sqlQuery = "update products " +
                     "set status = ? where id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
-            preparedStatement.setInt(1,-1);
+            preparedStatement.setInt(1,ProductStatus.DELETE.getValue());
             preparedStatement.setString(2,id);
             System.out.println("Connection success!");
             preparedStatement.execute();

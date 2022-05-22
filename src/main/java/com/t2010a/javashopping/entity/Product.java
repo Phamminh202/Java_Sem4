@@ -1,52 +1,38 @@
 package com.t2010a.javashopping.entity;
 
+import com.t2010a.javashopping.entity.base.BaseEntity;
+import com.t2010a.javashopping.entity.myenum.ProductStatus;
+
 import java.time.LocalDateTime;
 
-public class Product {
+public class Product extends BaseEntity {
     private String id;
     private String name;
+    private String image;
     private double price;
-    private String content;
-    private String size;
     private int qty;
-    private int sku;
-    private String category;
-    private String tag;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private int status;
+    private int color_id;
+    private String content;
+    private int category_id;
+    private ProductStatus status;
 
     public Product() {
+        this.id = "";
+        this.name = "";
+        this.image = "";
+        this.content = "";
     }
 
-    public Product(String id, String name, double price, String content, String size, int qty, int sku, String category, String tag, LocalDateTime createdAt, LocalDateTime updatedAt, int status) {
+    public Product(String id, String name, String image, double price, int qty, int color_id, String content, int category_id) {
         this.id = id;
         this.name = name;
+        this.image = image;
         this.price = price;
-        this.content = content;
-        this.size = size;
         this.qty = qty;
-        this.sku = sku;
-        this.category = category;
-        this.tag = tag;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.status = status;
-    }
-
-    public Product(String id, String name, double price, String content, String size, int qty, int sku, String category, String tag) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
+        this.color_id = color_id;
         this.content = content;
-        this.size = size;
-        this.qty = qty;
-        this.sku = sku;
-        this.category = category;
-        this.tag = tag;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-        this.status = 1;
+        this.category_id = category_id;
+        this.status = ProductStatus.ACTIVE;
     }
 
     public String getId() {
@@ -65,28 +51,20 @@ public class Product {
         this.name = name;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public double getPrice() {
         return price;
     }
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
     }
 
     public int getQty() {
@@ -97,51 +75,35 @@ public class Product {
         this.qty = qty;
     }
 
-    public int getSku() {
-        return sku;
+    public int getColor_id() {
+        return color_id;
     }
 
-    public void setSku(int sku) {
-        this.sku = sku;
+    public void setColor_id(int color_id) {
+        this.color_id = color_id;
     }
 
-    public String getCategory() {
-        return category;
+    public String getContent() {
+        return content;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getTag() {
-        return tag;
+    public int getCategory_id() {
+        return category_id;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setCategory_id(int category_id) {
+        this.category_id = category_id;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public int getStatus() {
+    public ProductStatus getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(ProductStatus status) {
         this.status = status;
     }
 }

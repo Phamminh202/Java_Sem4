@@ -33,14 +33,13 @@ public class CreateProductServlet extends HttpServlet {
 
         String id = req.getParameter("id");
         String name = req.getParameter("name");
+        String image = req.getParameter("image");
         double price = Double.valueOf(req.getParameter("price"));
-        String content = req.getParameter("content");
-        String size = req.getParameter("size");
         int qty = Integer.parseInt(req.getParameter("qty"));
-        int sku = Integer.parseInt(req.getParameter("sku"));
-        String category = req.getParameter("category");
-        String tag = req.getParameter("tag");
-        Product product = new Product(id, name, price, content,size,qty,sku,category,tag );
+        int color = Integer.parseInt(req.getParameter("color"));
+        String content = req.getParameter("content");
+        int category = Integer.parseInt(req.getParameter("category"));
+        Product product = new Product(id, name,image, price, qty,color,content,category);
 
         HashMap<String,String> errors = new HashMap<>();
         if (id == null || id.length() == 0){
@@ -49,26 +48,23 @@ public class CreateProductServlet extends HttpServlet {
         if (name == null || name.length() == 0){
             errors.put("name","Please enter name");
         }
+        if (image == null || image.length() == 0){
+            errors.put("image","Please enter image");
+        }
         if (price == 0){
             errors.put("price","Please enter price");
-        }
-        if (content == null || content.length() == 0){
-            errors.put("content","Please enter content");
-        }
-        if (size == null || size.length() == 0){
-            errors.put("size","Please enter size");
         }
         if (qty == 0){
             errors.put("qty","Please enter qty");
         }
-        if (sku == 0){
-            errors.put("sku","Please enter sku");
+        if (color == 0){
+            errors.put("color","Please enter color");
         }
-        if (category == null || category.length() == 0){
+        if (content == null || content.length() == 0){
+            errors.put("content","Please enter content");
+        }
+        if (category == 0){
             errors.put("category","Please enter category");
-        }
-        if (tag == null || tag.length() == 0){
-            errors.put("tag","Please enter tag");
         }
         if (errors.size() > 0){
             req.setAttribute("product",product);

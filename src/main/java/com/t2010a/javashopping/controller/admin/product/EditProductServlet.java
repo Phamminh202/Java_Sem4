@@ -45,14 +45,13 @@ public class EditProductServlet extends HttpServlet {
             req.getRequestDispatcher("/admin/error/404.jsp").forward(req,resp);
         }else {
             String name = req.getParameter("name");
+            String image = req.getParameter("image");
             double price = Double.valueOf(req.getParameter("price"));
-            String content = req.getParameter("content");
-            String size = req.getParameter("size");
             int qty = Integer.parseInt(req.getParameter("qty"));
-            int sku = Integer.parseInt(req.getParameter("sku"));
-            String category = req.getParameter("category");
-            String tag = req.getParameter("tag");
-            Product product = new Product(id, name, price, content,size,qty,sku,category,tag );
+            int color = Integer.parseInt(req.getParameter("color"));
+            String content = req.getParameter("content");
+            int category = Integer.parseInt(req.getParameter("category"));
+            Product product = new Product(id, name,image, price, qty,color,content,category);
 
             if (productModel.update(id, product) != null) {
                 resp.sendRedirect("/admin/products/list");
