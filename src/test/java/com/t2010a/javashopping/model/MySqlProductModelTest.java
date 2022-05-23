@@ -1,8 +1,11 @@
 package com.t2010a.javashopping.model;
 
 import com.t2010a.javashopping.entity.Product;
+import com.t2010a.javashopping.entity.myenum.ProductStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,17 +19,16 @@ class MySqlProductModelTest {
 
     @Test
     void findById() {
-        Product product = model.findById("SP001");
-        assertEquals("Hooded thermal anorak",product.getName());
+        System.out.println(model.findById("SP001").toString());
     }
 
     @Test
     void update() {
         Product product = model.findById("SP002");
-        product.setName("Update");
+        product.setName("UpdateName");
+        product.setUpdatedAt(LocalDateTime.now());
         model.update("SP002",product);
-        Product product1 = model.findById("SP002");
-        assertEquals("Update",product1.getName());
+        System.out.println(model.findById("SP002").toString());
     }
 
     @Test
@@ -34,5 +36,9 @@ class MySqlProductModelTest {
         model.delete("SP002");
         Product product = model.findById("SP002");
         assertEquals(null,product);
+    }
+
+    @Test
+    void save() {
     }
 }

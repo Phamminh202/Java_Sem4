@@ -29,7 +29,7 @@ public class DeleteProductServlet extends HttpServlet {
             req.getRequestDispatcher("/admin/errors/404.jsp").forward(req, resp);
         } else {
             boolean result = productModel.delete(id);
-            if (result) {
+            if (!result) {
                 resp.sendRedirect("/admin/products/list");
             } else {
                 req.setAttribute("message", "Action fails!");

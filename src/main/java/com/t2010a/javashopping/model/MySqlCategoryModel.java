@@ -42,7 +42,7 @@ public class MySqlCategoryModel implements CategoryModel{
             Connection connection = ConnectionHelper.getConnection();
             String sqlQuery = "select * from categories where status = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
-            preparedStatement.setInt(1,1);
+            preparedStatement.setInt(1,CategoryStatus.ACTIVE.getValue());
             System.out.println("Connection success!");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
@@ -72,7 +72,7 @@ public class MySqlCategoryModel implements CategoryModel{
             Connection connection = ConnectionHelper.getConnection();
             String sqlQuery = "select * from categories where status = ? and id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
-            preparedStatement.setInt(1,1);
+            preparedStatement.setInt(1,CategoryStatus.ACTIVE.getValue());
             preparedStatement.setInt(2,id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){

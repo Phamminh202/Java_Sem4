@@ -1,6 +1,10 @@
 package com.t2010a.javashopping.controller.admin.product;
 
+import com.t2010a.javashopping.entity.Category;
+import com.t2010a.javashopping.entity.Color;
 import com.t2010a.javashopping.entity.Product;
+import com.t2010a.javashopping.model.CategoryModel;
+import com.t2010a.javashopping.model.ColorModel;
 import com.t2010a.javashopping.model.MySqlProductModel;
 import com.t2010a.javashopping.model.ProductModel;
 

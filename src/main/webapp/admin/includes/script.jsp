@@ -54,3 +54,4 @@
 
 <!-- Page Specific JS File -->
 <script src="../assets/js/page/forms-advanced-forms.js"></script>
+<script src="../assets/modules/summernote/summernote-bs4.js"></script>

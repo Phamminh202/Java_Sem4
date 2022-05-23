@@ -1,4 +1,8 @@
-<%@ page import="com.t2010a.javashopping.entity.Product" %><%--
+<%@ page import="com.t2010a.javashopping.entity.Product" %>
+<%@ page import="com.t2010a.javashopping.entity.Color" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.t2010a.javashopping.entity.Category" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: PhạmMinh
   Date: 21/05/2022
@@ -8,6 +12,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Product product = (Product) request.getAttribute("product");
+    List<Color> colors = (List<Color>) request.getAttribute("color");
+    List<Category> categories = (List<Category>) request.getAttribute("category");
+    if (colors == null){
+        colors = new ArrayList<>();
+    }
+    if (categories == null){
+        colors = new ArrayList<>();
+    }
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,49 +33,73 @@
         <div class="main-content">
             <section class="section">
                 <div class="section-header">
-                    <h1>Detail Product</h1>
+                    <h1>Details Product</h1>
                 </div>
                 <div class="section-body">
                     <div class="row mt-sm-4">
-                        <div class="col-12 col-md-12 col-lg-10">
+                        <div class="col-12 col-md-12 col-lg-4">
                             <div class="card profile-widget">
-                                <div class="profile-widget-header">
-                                    <img alt="image" src="../assets/img/avatar/avatar-1.png" class="rounded-circle profile-widget-picture">
-                                    <div class="profile-widget-items">
-                                        <div class="profile-widget-item">
-                                            <div class="profile-widget-item-label">Posts</div>
-                                            <div class="profile-widget-item-value">187</div>
-                                        </div>
-                                        <div class="profile-widget-item">
-                                            <div class="profile-widget-item-label">Followers</div>
-                                            <div class="profile-widget-item-value">6,8K</div>
-                                        </div>
-                                        <div class="profile-widget-item">
-                                            <div class="profile-widget-item-label">Following</div>
-                                            <div class="profile-widget-item-value">2,1K</div>
-                                        </div>
-                                    </div>
+                                <img src="<%=product.getImage()%>" class="img-thumbnail">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-8">
+                            <h3 class="my-3"><%=product.getName()%></h3>
+                            <p><%=product.getContent()%></p>
+                            <hr>
+                            <h4>Colors</h4>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <%for (Color cl : colors){%>
+                                    <%if(product.getColor_id() == cl.getId()){%>
+                                        <p><%=cl.getName()%></p>
+                                    <%}%>
+                                <%}%>
+                                <br>
+                            </div>
+                            <h4>Category</h4>
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <%for (Category ct : categories){%>
+                                    <%if(product.getCategory_id() == ct.getId()){%>
+                                        <p><%=ct.getName()%></p>
+                                    <%}%>
+                                <%}%>
+                                <br>
+                            </div>
+                            <div class="bg-gray py-2 px-3 mt-4">
+                                <h2 class="mb-0">
+                                    $80.00
+                                </h2>
+                                <h4 class="mt-0">
+                                    <small>Ex Tax: $80.00 </small>
+                                </h4>
+                            </div>
+
+                            <div class="mt-4">
+                                <div class="btn btn-primary btn-lg btn-flat">
+                                    <i class="fas fa-cart-plus fa-lg mr-2"></i>
+                                    Add to Cart
                                 </div>
-                                <div class="profile-widget-description">
-                                    <div class="profile-widget-name"><%=product.getName()%> <div class="text-muted d-inline font-weight-normal"><div class="slash"></div> <%=product.getCategory()%></div></div>
-                                    <%=product.getContent()%>
-                                </div>
-                                <div class="card-footer text-center">
-                                    <div class="font-weight-bold mb-2">Follow Ujang On</div>
-                                    <a href="#" class="btn btn-social-icon btn-facebook mr-1">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-social-icon btn-twitter mr-1">
-                                        <i class="fab fa-twitter"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-social-icon btn-github mr-1">
-                                        <i class="fab fa-github"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-social-icon btn-instagram">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
+
+                                <div class="btn btn-default btn-lg btn-flat">
+                                    <i class="fas fa-heart fa-lg mr-2"></i>
+                                    Add to Wishlist
                                 </div>
                             </div>
+
+                            <div class="mt-4 product-share">
+                                <a href="#" class="text-gray">
+                                    <i class="fab fa-facebook-square fa-2x"></i>
+                                </a>
+                                <a href="#" class="text-gray">
+                                    <i class="fab fa-twitter-square fa-2x"></i>
+                                </a>
+                                <a href="#" class="text-gray">
+                                    <i class="fas fa-envelope-square fa-2x"></i>
+                                </a>
+                                <a href="#" class="text-gray">
+                                    <i class="fas fa-rss-square fa-2x"></i>
+                                </a>
+                            </div>
+
                         </div>
                     </div>
                 </div>

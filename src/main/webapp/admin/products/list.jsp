@@ -1,6 +1,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.t2010a.javashopping.entity.Product" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.t2010a.javashopping.entity.Color" %>
+<%@ page import="com.t2010a.javashopping.entity.Category" %><%--
   Created by IntelliJ IDEA.
   User: PhạmMinh
   Date: 20/05/2022
@@ -38,16 +40,10 @@
                                         <table class="table table-striped" id="table-1">
                                             <thead>
                                             <tr>
-                                                <th>Id</th>
                                                 <th>Name</th>
                                                 <th>Image</th>
                                                 <th>Price</th>
                                                 <th>Quantity</th>
-                                                <th>Color</th>
-                                                <th>Content</th>
-                                                <th>Category</th>
-                                                <th>Create At</th>
-                                                <th>Update At</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -55,16 +51,10 @@
                                             <tbody>
                                             <%for (Product pd : products){%>
                                             <tr>
-                                                <th><%=pd.getId()%></th>
                                                 <th><%=pd.getName()%></th>
-                                                <th><%=pd.getImage()%></th>
+                                                <th><img src="<%=pd.getImage()%>" class="img-thumbnail" width="120px"></th>
                                                 <th><%=pd.getPrice()%></th>
                                                 <th><%=pd.getQty()%></th>
-                                                <th><%=pd.getColor()%></th>
-                                                <th><%=pd.getContent()%></th>
-                                                <th><%=pd.getCategory()%></th>
-                                                <th><%=pd.getCreatedAt()%></th>
-                                                <th><%=pd.getUpdatedAt()%></th>
                                                 <th>
                                                     <%if (pd.getQty() > 0){%>
                                                         <div class="badge badge-success">Stocking</div>
