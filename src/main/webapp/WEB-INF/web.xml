@@ -60,4 +60,28 @@
         <servlet-name>DeleteProductAdmin</servlet-name>
         <url-pattern>/admin/products/delete</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ShopProduct</servlet-name>
+        <servlet-class>com.t2010a.javashopping.controller.user.product.ListProductServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShopProduct</servlet-name>
+        <url-pattern>/shop</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddCart</servlet-name>
+        <servlet-class>com.t2010a.javashopping.controller.user.cart.AddCartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddCart</servlet-name>
+        <url-pattern>/cart/add</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ShowCart</servlet-name>
+        <servlet-class>com.t2010a.javashopping.controller.user.cart.ShowCartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowCart</servlet-name>
+        <url-pattern>/cart/show</url-pattern>
+    </servlet-mapping>
 </web-app>

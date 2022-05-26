@@ -59,7 +59,6 @@ public class CreateProductServlet extends HttpServlet {
         product.setCategory_id(category_id);
         product.setStatus(ProductStatus.of(status));
 
-
         if (!product.isValid()){
             req.setAttribute("product",product);
             req.setAttribute("color", colorModel.findAll());

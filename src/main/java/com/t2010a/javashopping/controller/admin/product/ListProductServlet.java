@@ -3,10 +3,7 @@ package com.t2010a.javashopping.controller.admin.product;
 import com.t2010a.javashopping.entity.Category;
 import com.t2010a.javashopping.entity.Color;
 import com.t2010a.javashopping.entity.Product;
-import com.t2010a.javashopping.model.CategoryModel;
-import com.t2010a.javashopping.model.ColorModel;
-import com.t2010a.javashopping.model.MySqlProductModel;
-import com.t2010a.javashopping.model.ProductModel;
+import com.t2010a.javashopping.model.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,9 +14,13 @@ import java.util.List;
 
 public class ListProductServlet extends HttpServlet {
     private ProductModel productModel;
+    private ColorModel colorModel;
+    private CategoryModel categoryModel;
 
     public ListProductServlet() {
         this.productModel = new MySqlProductModel();
+        this.colorModel = new MySqlColorModel();
+        this.categoryModel = new MySqlCategoryModel();
     }
 
     @Override
@@ -27,6 +28,8 @@ public class ListProductServlet extends HttpServlet {
         List<Product> products = productModel.findAll();
         req.setAttribute("title","List Product");
         req.setAttribute("listProduct",products);
+        req.setAttribute("color", colorModel.findAll());
+        req.setAttribute("category", categoryModel.findAll());
         req.getRequestDispatcher("/admin/products/list.jsp").forward(req,resp);
     }
 }

@@ -25,7 +25,7 @@ class MySqlProductModelTest {
     @Test
     void update() {
         Product product = model.findById("SP002");
-        product.setName("UpdateName");
+        product.setColor_id(1);
         product.setUpdatedAt(LocalDateTime.now());
         model.update("SP002",product);
         System.out.println(model.findById("SP002").toString());

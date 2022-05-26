@@ -12,8 +12,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     List<Product> products = (List<Product>) request.getAttribute("listProduct");
+    List<Color> colors = (List<Color>) request.getAttribute("color");
+    List<Category> categories = (List<Category>) request.getAttribute("category");
     if (products == null){
         products = new ArrayList<>();
+    }
+    if (colors == null){
+        colors = new ArrayList<>();
+    }
+    if (categories == null){
+        categories = new ArrayList<>();
     }
 %>
 <!DOCTYPE html>
@@ -44,6 +52,8 @@
                                                 <th>Image</th>
                                                 <th>Price</th>
                                                 <th>Quantity</th>
+                                                <th>Color</th>
+                                                <th>Category</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -55,6 +65,16 @@
                                                 <th><img src="<%=pd.getImage()%>" class="img-thumbnail" width="120px"></th>
                                                 <th><%=pd.getPrice()%></th>
                                                 <th><%=pd.getQty()%></th>
+                                                <%for (int i = 0; i < colors.size(); i++) {%>
+                                                    <%if (pd.getColor_id() == colors.get(i).getId()){%>
+                                                        <th><%=colors.get(i).getName()%></th>
+                                                    <%}else{%>
+                                                <%}}%>
+                                                <%for (int i = 0; i < categories.size(); i++) {%>
+                                                    <%if (pd.getCategory_id() == categories.get(i).getId()){%>
+                                                        <th><%=categories.get(i).getName()%></th>
+                                                    <%}else{%>
+                                                <%}}%>
                                                 <th>
                                                     <%if (pd.getQty() > 0){%>
                                                         <div class="badge badge-success">Stocking</div>

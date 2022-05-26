@@ -20,7 +20,7 @@ public class MySqlProductModel implements ProductModel{
             Connection connection = ConnectionHelper.getConnection();
             String sqlQuery = "insert into products "+
                     "(id,name,image,price,qty,color_id,content,category_id,createdAt,updatedAt,status)"+
-                    "value "+"(?,?,?,?,?,?,?,?,?,?,?,?)";
+                    "value "+"(?,?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
             preparedStatement.setString(1,product.getId());
             preparedStatement.setString(2,product.getName());
@@ -119,7 +119,7 @@ public class MySqlProductModel implements ProductModel{
             String sqlQuery = "update products "+
                     "set id = ?,name = ?,image = ?,price = ?,qty = ?,color_id = ?,content = ?,category_id = ?, createdAt = ?,updatedAt = ? ,status = ? where id =?";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
-            preparedStatement.setString(1,product.getId());
+            preparedStatement.setString(1,id);
             preparedStatement.setString(2,product.getName());
             preparedStatement.setString(3,product.getImage());
             preparedStatement.setDouble(4,product.getPrice());

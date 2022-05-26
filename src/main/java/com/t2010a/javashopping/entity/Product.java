@@ -163,4 +163,8 @@ public class Product extends BaseEntity {
     public HashMap<String, String> getErrors() {
         return errors;
     }
+
+    public void setErrors(HashMap<String, String> errors) {
+        this.errors = errors;
+    }
 }

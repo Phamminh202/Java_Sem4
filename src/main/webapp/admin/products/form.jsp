@@ -3,7 +3,8 @@
 <%@ page import="com.t2010a.javashopping.entity.Color" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.t2010a.javashopping.entity.Category" %>
-<%@ page import="com.t2010a.javashopping.entity.myenum.ProductStatus" %><%--
+<%@ page import="com.t2010a.javashopping.entity.myenum.ProductStatus" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: PhạmMinh
   Date: 21/05/2022
@@ -16,7 +17,7 @@
   List<Color> colors = (List<Color>) request.getAttribute("color");
   List<Category> categories = (List<Category>) request.getAttribute("category");
   int action = (int) request.getAttribute("action");
-  HashMap<String,String> errors = (HashMap<String, String>) request.getAttribute("errors");
+  HashMap<String,String> errors = product.getErrors();
   String url = "/admin/products/create";
   if(action == 2){
     url = "/admin/products/edit";
@@ -25,10 +26,10 @@
     errors = new HashMap<>();
   }
   if (colors == null){
-    errors = new HashMap<>();
+    colors = new ArrayList<>();
   }
   if (categories == null){
-    errors = new HashMap<>();
+    categories = new ArrayList<>();
   }
 %>
 <!DOCTYPE html>
@@ -106,10 +107,10 @@
                     <select class="form-control col-md-3" id="color_id" name="color_id">
                       <%if (action==1){%><option value="0">Tất cả</option><%}%>
                       <%for (int i = 0; i < colors.size(); i++) {%>
-                      <%if (product.getColor_id() == colors.get(i).getId()){%>
-                      <option value="0"><%=colors.get(i).getName()%></option>
-                      <%}else{%>
-                      <option value="<%=colors.get(i).getId()%>"><%=colors.get(i).getName()%></option>
+                        <%if (product.getColor_id() == colors.get(i).getId()){%>
+                          <option selected value="<%=colors.get(i).getId()%>"><%=colors.get(i).getName()%></option>
+                        <%}else{%>
+                          <option value="<%=colors.get(i).getId()%>"><%=colors.get(i).getName()%></option>
                       <%}}%>
                     </select>
                     <%if (errors.containsKey("color_id")){%>
@@ -122,7 +123,7 @@
                       <%if (action==1){%><option value="0">Tất cả</option><%}%>
                       <%for (int i = 0; i < categories.size(); i++) {%>
                         <%if (product.getCategory_id() == categories.get(i).getId()){%>
-                          <option value="0"><%=categories.get(i).getName()%></option>
+                          <option selected value="<%=colors.get(i).getId()%>"><%=categories.get(i).getName()%></option>
                         <%}else{%>
                           <option value="<%=categories.get(i).getId()%>"><%=categories.get(i).getName()%></option>
                       <%}}%>
@@ -135,7 +136,7 @@
                     <label for="contents">Content</label>
                     <textarea class="summernote" id="contents" name="content"><%=product.getContent()%></textarea>
                     <%if (errors.containsKey("content")){%>
-                    <span class="text-danger">* <%=errors.get("content")%></span>
+                    <span class="text-danger"><br>* <%=errors.get("content")%></span>
                     <%}%>
                   </div
                   <div class="form-group">

@@ -44,41 +44,48 @@ public class EditProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         String id = req.getParameter("id");
-        String name = req.getParameter("name");
-        String image = req.getParameter("image");
-        double price = Double.valueOf(req.getParameter("price"));
-        int qty = Integer.parseInt(req.getParameter("qty"));
-        int color_id = Integer.parseInt(req.getParameter("color_id"));
-        String content = req.getParameter("content");
-        int category_id = Integer.parseInt(req.getParameter("category_id"));
-        int status = Integer.parseInt(req.getParameter("status"));
-        Product product = new Product();
-        product.setId(id);
-        product.setName(name);
-        product.setImage(image);
-        product.setPrice(price);
-        product.setQty(qty);
-        product.setColor_id(color_id);
-        product.setContent(content);
-        product.setCategory_id(category_id);
-        product.setUpdatedAt(LocalDateTime.now());
-        product.setStatus(ProductStatus.of(status));
-
-        if (!product.isValid()){
-            req.setAttribute("product",product);
-            req.setAttribute("color", colorModel.findAll());
-            req.setAttribute("category", categoryModel.findAll());
-            req.setAttribute("action",1);
-            req.setAttribute("title","Edit Product");
-            req.setAttribute("errors",product.getErrors());
-            req.getRequestDispatcher("/admin/products/form.jsp").forward(req,resp);
-        }
-        if (productModel.save(product) != null){
-            resp.sendRedirect("/admin/products/list");
+        Product existproduct = productModel.findById(id);
+        if(existproduct == null){
+            req.setAttribute("message", "Data not found!");
+            req.getRequestDispatcher("/admin/errors/404.jsp").forward(req, resp);
         }else {
-            req.setAttribute("action",2);
-            req.setAttribute("title","Edit Product");
-            req.getRequestDispatcher("/admin/products/form.jsp").forward(req,resp);
+            String name = req.getParameter("name");
+            String image = req.getParameter("image");
+            double price = Double.valueOf(req.getParameter("price"));
+            int qty = Integer.parseInt(req.getParameter("qty"));
+            int color_id = Integer.parseInt(req.getParameter("color_id"));
+            String content = req.getParameter("content");
+            int category_id = Integer.parseInt(req.getParameter("category_id"));
+            int status = Integer.parseInt(req.getParameter("status"));
+            Product product = new Product();
+            product.setName(name);
+            product.setImage(image);
+            product.setPrice(price);
+            product.setQty(qty);
+            product.setColor_id(color_id);
+            product.setContent(content);
+            product.setCategory_id(category_id);
+            product.setStatus(ProductStatus.of(status));
+
+            if (product.isValid()) {
+                req.setAttribute("product", product);
+                req.setAttribute("color", colorModel.findAll());
+                req.setAttribute("category", categoryModel.findAll());
+                req.setAttribute("action", 2);
+                req.setAttribute("title", "Edit Product");
+                req.setAttribute("errors", product.getErrors());
+                req.getRequestDispatcher("/admin/products/form.jsp").forward(req, resp);
+            }
+            if (productModel.update(id,product) != null) {
+                resp.sendRedirect("/admin/products/list");
+            } else {
+                req.setAttribute("product",product);
+                req.setAttribute("color", colorModel.findAll());
+                req.setAttribute("category", categoryModel.findAll());
+                req.setAttribute("action", 2);
+                req.setAttribute("title", "Edit Product");
+                req.getRequestDispatcher("/admin/products/form.jsp").forward(req, resp);
+            }
         }
     }
 }
