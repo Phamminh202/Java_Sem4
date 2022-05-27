@@ -1,4 +1,4 @@
-package com.t2010a.javashopping.controller.admin.product;
+package com.t2010a.javashopping.controller.user.product;
 
 import com.t2010a.javashopping.entity.Category;
 import com.t2010a.javashopping.entity.Color;
@@ -34,12 +34,12 @@ public class DetailProductServlet extends HttpServlet {
 
         if (product == null) {
             req.setAttribute("message", "Data not found!");
-            req.getRequestDispatcher("/admin/errors/404.jsp").forward(req, resp);
+            req.getRequestDispatcher("/user/errors/404.jsp").forward(req, resp);
         } else {
             req.setAttribute("product", product);
             req.setAttribute("color", color);
             req.setAttribute("category", category);
-            req.getRequestDispatcher("/admin/products/detail.jsp").forward(req, resp);
+            req.getRequestDispatcher("/user/product/detail.jsp").forward(req, resp);
         }
     }
 }

@@ -26,7 +26,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
                                     <a class="dropdown-item" href="/cart/show">Shopping cart</a>
-                                    <a class="dropdown-item" href="">Checkout</a>
+                                    <a class="dropdown-item" href="/checkout">Checkout</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -34,19 +34,19 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Contact</a>
+                                <a class="nav-link" href="">Contact</a>
                             </li>
                         </ul>
                     </div>
                     <div class="hearer_icon d-flex">
                         <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
-                        <a href="#"><i class="ti-heart"></i></a>
                         <div class="dropdown">
                             <a href="#" id="navbarDropdown3" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="ti-shopping-cart"></i>
                             </a>
                         </div>
+                        <a href="/login"><i class="fa fa-user-circle"></i></a>
                     </div>
                 </nav>
             </div>

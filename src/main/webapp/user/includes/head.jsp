@@ -24,4 +24,5 @@
     <link rel="stylesheet" href="/user/content/css/price_rangs.css">
     <!-- style CSS -->
     <link rel="stylesheet" href="/user/content/css/style.css">
+    <link rel="stylesheet" href="/user/content/css/lightslider.min.css">
 </head>

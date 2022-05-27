@@ -30,12 +30,18 @@ public class AddCartServlet extends HttpServlet {
             String id = req.getParameter("id");
             int qty = Integer.parseInt(req.getParameter("qty"));
             Product product = productModel.findById(id);
-            if (product == null || qty <= 0){
-                req.setAttribute("message","Error by id!!");
+            if (product == null){
+                req.setAttribute("message","Error!!");
+                req.getRequestDispatcher("/user/errors/404.jsp").forward(req,resp);
+                return;
+            }
+            if (qty <= 0){
+                req.setAttribute("message","Error!!");
                 req.getRequestDispatcher("/user/errors/404.jsp").forward(req,resp);
                 return;
             }
             shoppingCart.add(product,qty);
+            session.setAttribute("shoppingcart", shoppingCart);
             resp.sendRedirect("/cart/show");
         }catch (Exception e){
             e.printStackTrace();

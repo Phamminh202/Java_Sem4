@@ -10,8 +10,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("shoppingcart");
+    int action = (int) request.getAttribute("action");
+    double totalPrice =0;
     if (shoppingCart == null) {
         shoppingCart = new ShoppingCart();
+        action = 2;
     }
 %>
 <!doctype html>
@@ -22,26 +25,14 @@
 
 <!--================Home Banner Area =================-->
 <!-- breadcrumb start-->
-<section class="breadcrumb breadcrumb_bg">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="breadcrumb_iner">
-                    <div class="breadcrumb_iner_item">
-                        <h2>Cart Products</h2>
-                        <p>Home <span>-</span>Cart Products</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<jsp:include page="../includes/breadcrumb.jsp"></jsp:include>
 <!-- breadcrumb start-->
 
 <!--================Cart Area =================-->
 <section class="cart_area padding_top">
     <div class="container">
         <div class="cart_inner">
+            <%if (action == 1){%>
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -50,16 +41,18 @@
                         <th scope="col">Price</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Total</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
                     <%List<CartItem> items = shoppingCart.getListItems();
-                        for (int i = 0; i < items.size(); i++) {%>
+                        for (int i = 0; i < items.size(); i++) {
+                            totalPrice = items.get(i).getUnitPrice() * items.get(i).getQty();%>
                         <tr>
                         <td>
                             <div class="media">
                                 <div class="d-flex">
-                                    <img src="<%=items.get(i).getProductImage()%>" alt="" />
+                                    <img src="<%=items.get(i).getProductImage()%>" alt="" class="img-thumbnail" width="200px"/>
                                 </div>
                                 <div class="media-body">
                                     <p><%=items.get(i).getProductName()%></p>
@@ -67,17 +60,20 @@
                             </div>
                         </td>
                         <td>
-                            <h5><%=items.get(i).getUnitPrice()%></h5>
+                            <h5>$<%=items.get(i).getUnitPrice()%></h5>
                         </td>
                         <td>
                             <div class="product_count">
                                 <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
-                                <input class="input-number" type="text" value="<%=items.get(i).getQty()%>" min="1">
+                                <input class="input-number" type="text" value="<%=items.get(i).getQty()%>" min="1" name="qty">
                                 <span class="input-number-increment"> <i class="ti-angle-up"></i></span>
                             </div>
                         </td>
                         <td>
-                            <h5><%=items.get(i).getUnitPrice() * items.get(i).getQty()%></h5>
+                            <h5>$<%=items.get(i).getUnitPrice() * items.get(i).getQty()%></h5>
+                        </td>
+                        <td>
+                            <a class="fa fa-times-circle" style="color: black;" href="/cart/delete?id=<%=items.get(i).getProductId()%>" onclick="return confirm('Are you sure?')"></a>
                         </td>
                     </tr>
                     <%}%>
@@ -100,9 +96,10 @@
                             <h5>Subtotal</h5>
                         </td>
                         <td>
-                            <h5>$2160.00</h5>
+                            <h5>$<%=totalPrice%></h5>
                         </td>
                     </tr>
+<%--
                     <tr class="shipping_area">
                         <td></td>
                         <td></td>
@@ -144,13 +141,18 @@
                             </div>
                         </td>
                     </tr>
+--%>
                     </tbody>
                 </table>
                 <div class="checkout_btn_inner float-right">
                     <a class="btn_1" href="#">Continue Shopping</a>
-                    <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
+                    <a class="btn_1 checkout_btn_1" href="/checkout">Proceed to checkout</a>
                 </div>
             </div>
+            <%}else{%>
+            <h2>Your shopping cart is currently empty!</h2>
+            <a href="/shop"><- Back to Shop</a>
+            <%}%>
         </div>
     </div>
 </section>

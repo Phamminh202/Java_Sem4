@@ -26,3 +26,9 @@
 <script src="/user/content/js/custom.js"></script>
 <script src="/user/content/js/stellar.js"></script>
 <script src="/user/content/js/price_rangs.js"></script>
+<!-- swiper js -->
+<script src="/user/content/js/lightslider.min.js"></script>
+<!-- swiper js -->
+<script src="/user/content/js/swiper.jquery.js"></script>
+<!-- custom js -->
+<script src="/user/content/js/theme.js"></script>

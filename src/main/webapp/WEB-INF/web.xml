@@ -69,6 +69,14 @@
         <url-pattern>/shop</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>DetailProduct</servlet-name>
+        <servlet-class>com.t2010a.javashopping.controller.user.product.DetailProductServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DetailProduct</servlet-name>
+        <url-pattern>/product</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>AddCart</servlet-name>
         <servlet-class>com.t2010a.javashopping.controller.user.cart.AddCartServlet</servlet-class>
     </servlet>
@@ -83,5 +91,56 @@
     <servlet-mapping>
         <servlet-name>ShowCart</servlet-name>
         <url-pattern>/cart/show</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>DeleteCart</servlet-name>
+        <servlet-class>com.t2010a.javashopping.controller.user.cart.DeleteCartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteCart</servlet-name>
+        <url-pattern>/cart/delete</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Checkout</servlet-name>
+        <servlet-class>com.t2010a.javashopping.controller.user.cart.CheckoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Checkout</servlet-name>
+        <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>com.t2010a.javashopping.controller.account.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/login</url-pattern>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>com.t2010a.javashopping.controller.account.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Register</servlet-name>
+        <servlet-class>com.t2010a.javashopping.controller.account.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Register</servlet-name>
+        <url-pattern>/register</url-pattern>
+        <url-pattern>/Register</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ListCartAdmin</servlet-name>
+        <servlet-class>com.t2010a.javashopping.controller.admin.cart.ListCartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListCartAdmin</servlet-name>
+        <url-pattern>/admin/cart/list</url-pattern>
     </servlet-mapping>
 </web-app>

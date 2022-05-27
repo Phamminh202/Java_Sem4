@@ -26,20 +26,7 @@
 
 <!--================Home Banner Area =================-->
 <!-- breadcrumb start-->
-<section class="breadcrumb breadcrumb_bg">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="breadcrumb_iner">
-                    <div class="breadcrumb_iner_item">
-                        <h2>Shop Category</h2>
-                        <p>Home <span>-</span> Shop Category</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<jsp:include page="../includes/breadcrumb.jsp"></jsp:include>
 <!-- breadcrumb start-->
 
 <!--================Category Product Area =================-->
@@ -217,13 +204,14 @@
 
                 <div class="row align-items-center latest_product_inner">
                     <%for (Product product:products){%>
-                        <div class="col-lg-4 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                             <div class="single_product_item">
-                                <img src="<%=product.getImage()%>" alt="" class="img-thumbnail" width="265px">
+                                <a href="/product?id=<%=product.getId()%>"><img src="<%=product.getImage()%>" alt="" class="img-thumbnail" width="265px"></a>
                                 <div class="single_product_text">
                                     <h4><%=product.getName()%></h4>
-                                    <h3><%=product.getPrice()%>$</h3>
-                                    <a href="/cart/add?id=<%=product.getId()%>&qty=1" class="add_cart">+ add to cart<i class="ti-heart"></i></a>
+                                    <h3>$<%=product.getPrice()%></h3>
+                                    <a href="/cart/add?id=<%=product.getId()%>&qty=1" class="add_cart">+ Add to cart</a>
+                                    <a href="/product?id=<%=product.getId()%>"><i class="ti-search"></i></a>
                                 </div>
                             </div>
                         </div>

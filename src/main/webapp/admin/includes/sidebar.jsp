@@ -19,6 +19,12 @@
                     <li><a class="nav-link" href="/admin/products/list">List</a></li>
                 </ul>
             </li>
+            <li class="dropdown">
+                <a class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Order</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="/admin/cart/list">List</a></li>
+                </ul>
+            </li>
         </ul>
 
     </aside>

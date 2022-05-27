@@ -2,6 +2,7 @@ package com.t2010a.javashopping.entity.cart;
 
 import com.t2010a.javashopping.entity.Product;
 import com.t2010a.javashopping.entity.base.BaseEntity;
+import com.t2010a.javashopping.entity.myenum.ShoppingCartStatus;
 import com.t2010a.javashopping.model.ShoppingCartModel;
 
 import java.time.LocalDateTime;
@@ -16,7 +17,36 @@ public class ShoppingCart extends BaseEntity implements ShoppingCartModel {
     private String shipAddress;
     private String shipNote;
     private double totalPrice;
+    private ShoppingCartStatus status;
     private HashMap<String,CartItem> cartItems;
+
+    HashMap<String,String> errors = new HashMap<>();
+    public boolean isValid(){
+        checkValidate();
+        return errors.size()== 0;
+    }
+    private void checkValidate(){
+        if (shipName == null || shipName.length() == 0){
+            errors.put("shipName","Please enter name");
+        }
+        if (shipPhone == null || shipPhone.length() == 0){
+            errors.put("shipPhone","Please enter phone}");
+        }
+        if (shipAddress == null || shipAddress.length() == 0){
+            errors.put("shipAddress","Please enter address");
+        }
+        if (shipNote == null || shipNote.length() == 0){
+            errors.put("shipNote","Please enter note");
+        }
+    }
+
+    public HashMap<String, String> getErrors() {
+        return errors;
+    }
+
+    public ShoppingCart() {
+        cartItems = new HashMap<>();
+    }
 
     public int getId() {
         return id;
@@ -82,32 +112,39 @@ public class ShoppingCart extends BaseEntity implements ShoppingCartModel {
         this.cartItems = cartItems;
     }
 
+    public ShoppingCartStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ShoppingCartStatus status) {
+        this.status = status;
+    }
+
     @Override
     public void add(Product product, int qty) {
-        if (cartItems.containsKey(product.getId())){
-            CartItem cartItem = cartItems.get(product.getId());
-            int updateQty = cartItem.getQty() + qty;
-            update(product,updateQty);
-        }else {
-            update(product,qty);
+        if (cartItems.containsKey(product.getId())) {
+            CartItem currentItem = cartItems.get(product.getId());
+            int updateQuantity = currentItem.getQty() + qty;
+            update(product, updateQuantity);
+        } else {
+            update(product, qty);
         }
     }
 
     @Override
     public void update(Product product, int qty) {
-        if (cartItems.containsKey(product.getId())){
-            CartItem cartItem = cartItems.get(product.getId());
-            cartItem.setQty(qty);
-            cartItems.put(product.getId(),cartItem);
+        if (cartItems.containsKey(product.getId())) {
+            CartItem currentItem = cartItems.get(product.getId());
+            currentItem.setQty(qty);
+            cartItems.put(product.getId(), currentItem);
         } else {
-            CartItem cartItem = new CartItem();
-            cartItem.setProductId(product.getId());
-            cartItem.setProductName(product.getName());
-            cartItem.setProductImage(product.getImage());
-            cartItem.setUnitPrice(product.getPrice());
-            cartItem.setQty(qty);
-            cartItem.setCreatedAt(LocalDateTime.now());
-            cartItems.put(product.getId(),cartItem);
+            CartItem item = new CartItem();
+            item.setProductId(product.getId());
+            item.setProductName(product.getName());
+            item.setProductImage(product.getImage());
+            item.setUnitPrice(product.getPrice());
+            item.setQty(qty);
+            cartItems.put(product.getId(), item);
         }
     }
 
