@@ -11,4 +11,5 @@ public interface CheckoutShoppingCartModel {
     List<ShoppingCart> findAll();
 
     ShoppingCart findById(int id);
+    boolean browse(int id);
 }

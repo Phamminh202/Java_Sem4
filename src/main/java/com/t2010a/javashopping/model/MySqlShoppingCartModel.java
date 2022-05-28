@@ -3,6 +3,7 @@ package com.t2010a.javashopping.model;
 import com.t2010a.javashopping.entity.Category;
 import com.t2010a.javashopping.entity.cart.ShoppingCart;
 import com.t2010a.javashopping.entity.myenum.CategoryStatus;
+import com.t2010a.javashopping.entity.myenum.ProductStatus;
 import com.t2010a.javashopping.entity.myenum.ShoppingCartStatus;
 import com.t2010a.javashopping.util.ConnectionHelper;
 
@@ -31,7 +32,7 @@ public class MySqlShoppingCartModel implements CheckoutShoppingCartModel{
             preparedStatement.setString(5,shoppingCart.getShipNote());
             preparedStatement.setDouble(6,shoppingCart.getTotalPrice());
             preparedStatement.setString(7, LocalDateTime.now().toString());
-            preparedStatement.setInt(8, ShoppingCartStatus.ACTIVE.getValue());
+            preparedStatement.setInt(8, ShoppingCartStatus.UNAPPROVED.getValue());
             System.out.println("Connection success!");
             preparedStatement.execute();
             return shoppingCart;
@@ -113,5 +114,22 @@ public class MySqlShoppingCartModel implements CheckoutShoppingCartModel{
             e.printStackTrace();
         }
         return shoppingCart;
+    }
+
+    @Override
+    public boolean browse(int id) {
+        try {
+            Connection connection = ConnectionHelper.getConnection();
+            String sqlQuery = "update shoppingcart " +
+                    "set status = ? where id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
+            preparedStatement.setInt(1, ShoppingCartStatus.APPROVED.getValue());
+            preparedStatement.setInt(2,id);
+            System.out.println("Connection success!");
+            preparedStatement.execute();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
     }
 }

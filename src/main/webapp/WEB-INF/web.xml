@@ -151,6 +151,14 @@
         <servlet-name>DetailCartAdmin</servlet-name>
         <url-pattern>/admin/cart/detail</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>BrowseCartAdmin</servlet-name>
+        <servlet-class>com.t2010a.javashopping.controller.admin.cart.BrowseCartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BrowseCartAdmin</servlet-name>
+        <url-pattern>/admin/cart/browse</url-pattern>
+    </servlet-mapping>
     <!--<filter>
         <filter-name>AdminFilter</filter-name>
         <filter-class>com.t2010a.javashopping.controller.filter.AdminFilter</filter-class>

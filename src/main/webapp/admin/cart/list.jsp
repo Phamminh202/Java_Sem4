@@ -59,15 +59,16 @@
                                                 <th><%=sc.getShipNote()%></th>
                                                 <th><%=sc.getTotalPrice()%></th>
                                                 <th>
-                                                    <%if (sc.getStatus() == ShoppingCartStatus.ACTIVE){%>
-                                                    <div class="badge badge-success">Not approved yet</div>
+                                                    <%if (sc.getStatus() == ShoppingCartStatus.UNAPPROVED){%>
+                                                    <div class="badge badge-danger">Unapproved</div>
                                                     <%}%>
-                                                    <%if (sc.getStatus() == ShoppingCartStatus.DEACTIVE){%>
-                                                    <div class="badge badge-danger">Approved</div>
+                                                    <%if (sc.getStatus() == ShoppingCartStatus.APPROVED){%>
+                                                    <div class="badge badge-success">Approved</div>
                                                     <%}%>
                                                 </th>
                                                 <th>
                                                     <a href="/admin/cart/detail?id=<%=sc.getId()%>"><i class="fas fa-arrow-circle-right"></i></a>
+                                                    <a href="/admin/cart/browse?id=<%=sc.getId()%>" onclick="return confirm('Are you sure?')"><i class="fas fa-check-circle"></i></a>
                                                 </th>
                                             </tr>
                                             <%}%>

@@ -68,9 +68,16 @@ public class CheckoutServlet extends HttpServlet {
                         req.getRequestDispatcher("/user/cart/checkout.jsp").forward(req, resp);
                     }
                     if (checkoutShoppingCartModel.save(shoppingCart1) != null) {
+                        List<ShoppingCart> list = checkoutShoppingCartModel.findAll();
+                        int shoppingcartId = 0;
+                        for (int i = 0; i < list.size(); i++) {
+                            if (shoppingcartId <= list.get(i).getId()){
+                                shoppingcartId = list.get(i).getId();
+                            }
+                        }
                         List<CartItem> items = shoppingCart.getListItems();
                         for (int i = 0; i < items.size(); i++) {
-                            checkoutCartItemModel.save(items.get(i));
+                            checkoutCartItemModel.save(items.get(i),shoppingcartId);
                         }
                         session.removeAttribute("shoppingcart");
                         req.setAttribute("title", "Home");

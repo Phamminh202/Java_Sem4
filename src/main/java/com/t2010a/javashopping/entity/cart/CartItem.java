@@ -10,7 +10,6 @@ public class CartItem extends BaseEntity{
     private String productImage;
     private double unitPrice;
     private int qty;
-    private CartItemStatus status;
 
     public CartItem() {
     }
@@ -61,13 +60,5 @@ public class CartItem extends BaseEntity{
 
     public void setQty(int qty) {
         this.qty = qty;
-    }
-
-    public CartItemStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(CartItemStatus status) {
-        this.status = status;
     }
 }

@@ -15,21 +15,20 @@ import java.util.List;
 
 public class MySqlCartItemModel implements CheckoutCartItemModel{
     @Override
-    public CartItem save(CartItem cartItem) {
+    public CartItem save(CartItem cartItem,int shoppingcartId) {
         try {
             Connection connection = ConnectionHelper.getConnection();
             String sqlQuery = "insert into cartitem "+
-                    "(shoppingcartId,productId,productName,productImage,unitPrice,qty,createdAt,status)"+
-                    " value "+"(?,?,?,?,?,?,?,?)";
+                    "(shoppingcartId,productId,productName,productImage,unitPrice,qty,createdAt)"+
+                    " value "+"(?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
-            preparedStatement.setInt(1,cartItem.getShoppingcartId());
+            preparedStatement.setInt(1,shoppingcartId);
             preparedStatement.setString(2,cartItem.getProductId());
             preparedStatement.setString(3,cartItem.getProductName());
             preparedStatement.setString(4,cartItem.getProductImage());
             preparedStatement.setDouble(5,cartItem.getUnitPrice());
             preparedStatement.setInt(6,cartItem.getQty());
             preparedStatement.setString(7, LocalDateTime.now().toString());
-            preparedStatement.setInt(8, CartItemStatus.ACTIVE.getValue());
             System.out.println("Connection success!");
             preparedStatement.execute();
             return cartItem;
@@ -55,7 +54,6 @@ public class MySqlCartItemModel implements CheckoutCartItemModel{
                 double unitPrice = Double.parseDouble(resultSet.getString("unitPrice"));
                 int qty = Integer.parseInt(resultSet.getString("qty"));
                 LocalDateTime createdAt = LocalDateTime.ofInstant(resultSet.getTimestamp("createdAt").toInstant(), ZoneId.systemDefault());
-                int status = Integer.parseInt(resultSet.getString("status"));
                 CartItem cartItem = new CartItem();
                 cartItem.setShoppingcartId(shoppingcartId);
                 cartItem.setProductId(productId);
@@ -64,7 +62,6 @@ public class MySqlCartItemModel implements CheckoutCartItemModel{
                 cartItem.setUnitPrice(unitPrice);
                 cartItem.setQty(qty);
                 cartItem.setCreatedAt(createdAt);
-                cartItem.setStatus(CartItemStatus.of(status));
                 list.add(cartItem);
             }
             preparedStatement.execute();
@@ -91,7 +88,6 @@ public class MySqlCartItemModel implements CheckoutCartItemModel{
                 double unitPrice = Double.parseDouble(resultSet.getString("unitPrice"));
                 int qty = Integer.parseInt(resultSet.getString("qty"));
                 LocalDateTime createdAt = LocalDateTime.ofInstant(resultSet.getTimestamp("createdAt").toInstant(), ZoneId.systemDefault());
-                int status = Integer.parseInt(resultSet.getString("status"));
                 CartItem cartItem = new CartItem();
                 cartItem.setShoppingcartId(shoppingcartId);
                 cartItem.setProductId(productId);
@@ -100,7 +96,6 @@ public class MySqlCartItemModel implements CheckoutCartItemModel{
                 cartItem.setUnitPrice(unitPrice);
                 cartItem.setQty(qty);
                 cartItem.setCreatedAt(createdAt);
-                cartItem.setStatus(CartItemStatus.of(status));
                 list.add(cartItem);
             }
             preparedStatement.execute();

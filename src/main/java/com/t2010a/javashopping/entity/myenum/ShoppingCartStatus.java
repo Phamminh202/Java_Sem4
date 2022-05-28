@@ -1,7 +1,7 @@
 package com.t2010a.javashopping.entity.myenum;
 
 public enum ShoppingCartStatus {
-    ACTIVE(1),DEACTIVE(0),UNDEFINE(-2);
+    APPROVED(1),UNAPPROVED(0),UNDEFINE(-2);
 
     private int value;
     ShoppingCartStatus(int value) {

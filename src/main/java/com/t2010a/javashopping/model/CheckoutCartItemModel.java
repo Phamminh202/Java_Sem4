@@ -5,7 +5,7 @@ import com.t2010a.javashopping.entity.cart.CartItem;
 import java.util.List;
 
 public interface CheckoutCartItemModel {
-    CartItem save(CartItem cartItem);
+    CartItem save(CartItem cartItem,int shopppingcartId);
 
     List<CartItem> findAll();
 
