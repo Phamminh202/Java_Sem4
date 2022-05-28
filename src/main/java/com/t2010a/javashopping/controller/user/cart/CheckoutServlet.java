@@ -36,55 +36,58 @@ public class CheckoutServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         HttpSession session = req.getSession();
         ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("shoppingcart");
         Account account = (Account) session.getAttribute("currentLogin");
-        if (account == null){
+        if (account == null) {
             resp.sendRedirect("/login");
-        }
-        if (shoppingCart == null){
-            req.setAttribute("message","Error!!");
-            req.getRequestDispatcher("/user/errors/404.jsp").forward(req,resp);
-            return;
-        }
-        try{
-            String shipName = req.getParameter("firstname")+ " " + req.getParameter("lastname");
-            String shipPhone = req.getParameter("shipPhone");
-            String shipAddress = req.getParameter("shipAddress");
-            String shipNote = req.getParameter("shipNote");
-            double totalPrice = Double.parseDouble(req.getParameter("totalPrice"));
-            int userId = account.getId();
-            ShoppingCart shoppingCart1 = new ShoppingCart();
-            shoppingCart1.setUserId(userId);
-            shoppingCart1.setShipName(shipName);
-            shoppingCart1.setShipPhone(shipPhone);
-            shoppingCart1.setShipAddress(shipAddress);
-            shoppingCart1.setShipNote(shipNote);
-            shoppingCart1.setTotalPrice(totalPrice);
-            if (!shoppingCart1.isValid()){
-                req.setAttribute("title","Checkout");
-                req.setAttribute("action",1);
-                req.getRequestDispatcher("/user/cart/checkout.jsp").forward(req,resp);
-            }
-            if (checkoutShoppingCartModel.save(shoppingCart1) != null){
-                List<CartItem> items = shoppingCart.getListItems();
-                for (int i = 0; i < items.size(); i++) {
-                    checkoutCartItemModel.save(items.get(i));
-                }
-                session.removeAttribute("shoppingcart");
-                req.setAttribute("title","Home");
-                resp.sendRedirect("/home");
+        } else {
+            if (shoppingCart == null) {
+                req.setAttribute("message", "Error!!");
+                req.getRequestDispatcher("/user/errors/404.jsp").forward(req, resp);
+                return;
             }else {
-                req.setAttribute("title","Checkout");
-                req.setAttribute("action",1);
-                req.getRequestDispatcher("/user/cart/checkout.jsp").forward(req,resp);
+                try {
+                    String shipName = req.getParameter("firstname") + " " + req.getParameter("lastname");
+                    String shipPhone = req.getParameter("shipPhone");
+                    String shipAddress = req.getParameter("shipAddress");
+                    String shipNote = req.getParameter("shipNote");
+                    double totalPrice = Double.parseDouble(req.getParameter("totalPrice"));
+                    int userId = account.getId();
+                    ShoppingCart shoppingCart1 = new ShoppingCart();
+                    shoppingCart1.setUserId(userId);
+                    shoppingCart1.setShipName(shipName);
+                    shoppingCart1.setShipPhone(shipPhone);
+                    shoppingCart1.setShipAddress(shipAddress);
+                    shoppingCart1.setShipNote(shipNote);
+                    shoppingCart1.setTotalPrice(totalPrice);
+                    if (!shoppingCart1.isValid()) {
+                        req.setAttribute("title", "Checkout");
+                        req.setAttribute("action", 1);
+                        req.getRequestDispatcher("/user/cart/checkout.jsp").forward(req, resp);
+                    }
+                    if (checkoutShoppingCartModel.save(shoppingCart1) != null) {
+                        List<CartItem> items = shoppingCart.getListItems();
+                        for (int i = 0; i < items.size(); i++) {
+                            checkoutCartItemModel.save(items.get(i));
+                        }
+                        session.removeAttribute("shoppingcart");
+                        req.setAttribute("title", "Home");
+                        resp.sendRedirect("/home");
+                    } else {
+                        req.setAttribute("title", "Checkout");
+                        req.setAttribute("action", 1);
+                        req.getRequestDispatcher("/user/cart/checkout.jsp").forward(req, resp);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    req.setAttribute("message", "Error!!");
+                    req.getRequestDispatcher("/user/errors/500.jsp").forward(req, resp);
+                }
             }
 
-        }catch (Exception e){
-            e.printStackTrace();
-            req.setAttribute("message","Error!!");
-            req.getRequestDispatcher("/user/errors/500.jsp").forward(req,resp);
         }
-
     }
 }

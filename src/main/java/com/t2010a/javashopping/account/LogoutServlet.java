@@ -1,4 +1,4 @@
-package com.t2010a.javashopping.controller.account;
+package com.t2010a.javashopping.account;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

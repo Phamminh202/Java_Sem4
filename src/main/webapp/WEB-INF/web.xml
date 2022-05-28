@@ -110,7 +110,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>com.t2010a.javashopping.controller.account.LoginServlet</servlet-class>
+        <servlet-class>com.t2010a.javashopping.account.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -119,7 +119,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>Logout</servlet-name>
-        <servlet-class>com.t2010a.javashopping.controller.account.LogoutServlet</servlet-class>
+        <servlet-class>com.t2010a.javashopping.account.LogoutServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
@@ -128,7 +128,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>Register</servlet-name>
-        <servlet-class>com.t2010a.javashopping.controller.account.RegisterServlet</servlet-class>
+        <servlet-class>com.t2010a.javashopping.account.RegisterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
@@ -143,4 +143,32 @@
         <servlet-name>ListCartAdmin</servlet-name>
         <url-pattern>/admin/cart/list</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>DetailCartAdmin</servlet-name>
+        <servlet-class>com.t2010a.javashopping.controller.admin.cart.DetailCartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DetailCartAdmin</servlet-name>
+        <url-pattern>/admin/cart/detail</url-pattern>
+    </servlet-mapping>
+    <!--<filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>com.t2010a.javashopping.controller.filter.AdminFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/admin</url-pattern>
+        <url-pattern>/admin/*</url-pattern>
+        <url-pattern>/admin/*/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>UserFilter</filter-name>
+        <filter-class>com.t2010a.javashopping.controller.filter.UserFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <url-pattern>/user</url-pattern>
+        <url-pattern>/user/*</url-pattern>
+        <url-pattern>/user/*/*</url-pattern>
+    </filter-mapping>-->
 </web-app>

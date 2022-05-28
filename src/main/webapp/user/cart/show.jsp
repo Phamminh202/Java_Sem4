@@ -79,13 +79,13 @@
                     <%}%>
                     <tr class="bottom_button">
                         <td>
-                            <a class="btn_1" href="#">Update Cart</a>
+                            <a class="btn_1" href="/shop">Update Cart</a>
                         </td>
                         <td></td>
                         <td></td>
                         <td>
                             <div class="cupon_text float-right">
-                                <a class="btn_1" href="#">Close Coupon</a>
+                                <a class="btn_1" href="/home">Close Coupon</a>
                             </div>
                         </td>
                     </tr>

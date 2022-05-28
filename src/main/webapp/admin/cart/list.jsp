@@ -67,8 +67,7 @@
                                                     <%}%>
                                                 </th>
                                                 <th>
-                                                    <a href=""><i class="fas fa-arrow-circle-right"></i></a>
-                                                    <a href=""><i class="fa fa-pencil-alt"></i></a>
+                                                    <a href="/admin/cart/detail?id=<%=sc.getId()%>"><i class="fas fa-arrow-circle-right"></i></a>
                                                 </th>
                                             </tr>
                                             <%}%>

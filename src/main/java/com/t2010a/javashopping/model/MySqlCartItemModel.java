@@ -76,8 +76,8 @@ public class MySqlCartItemModel implements CheckoutCartItemModel{
     }
 
     @Override
-    public CartItem findByShoppingCartId(int shoppingcartId) {
-        CartItem cartItem = null;
+    public List<CartItem> findByShoppingCartId(int shoppingcartId) {
+        List<CartItem> list = new ArrayList<>();
         try {
             Connection connection = ConnectionHelper.getConnection();
             String sqlQuery = "select * from cartitem where shoppingcartId = ?";
@@ -92,6 +92,7 @@ public class MySqlCartItemModel implements CheckoutCartItemModel{
                 int qty = Integer.parseInt(resultSet.getString("qty"));
                 LocalDateTime createdAt = LocalDateTime.ofInstant(resultSet.getTimestamp("createdAt").toInstant(), ZoneId.systemDefault());
                 int status = Integer.parseInt(resultSet.getString("status"));
+                CartItem cartItem = new CartItem();
                 cartItem.setShoppingcartId(shoppingcartId);
                 cartItem.setProductId(productId);
                 cartItem.setProductName(productName);
@@ -100,12 +101,13 @@ public class MySqlCartItemModel implements CheckoutCartItemModel{
                 cartItem.setQty(qty);
                 cartItem.setCreatedAt(createdAt);
                 cartItem.setStatus(CartItemStatus.of(status));
+                list.add(cartItem);
             }
             preparedStatement.execute();
 
         }catch (SQLException e){
             e.printStackTrace();
         }
-        return cartItem;
+        return list;
     }
 }

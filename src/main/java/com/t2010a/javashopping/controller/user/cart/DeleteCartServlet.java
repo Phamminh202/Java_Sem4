@@ -1,5 +1,6 @@
 package com.t2010a.javashopping.controller.user.cart;
 
+import com.t2010a.javashopping.entity.Account;
 import com.t2010a.javashopping.entity.Product;
 import com.t2010a.javashopping.entity.cart.ShoppingCart;
 import com.t2010a.javashopping.model.MySqlProductModel;
@@ -23,16 +24,20 @@ public class DeleteCartServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("shoppingcart");
-        String id = req.getParameter("id");
-        Product product = productModel.findById(id);
-        if (product == null) {
-            req.setAttribute("message", "Product not found!");
-            req.getRequestDispatcher("/user/errors/404.jsp").forward(req, resp);
-            return;
+        Account account = (Account) session.getAttribute("currentLogin");
+        if (account == null) {
+            resp.sendRedirect("/login");
+        } else {
+            String id = req.getParameter("id");
+            Product product = productModel.findById(id);
+            if (product == null) {
+                req.setAttribute("message", "Product not found!");
+                req.getRequestDispatcher("/user/errors/404.jsp").forward(req, resp);
+                return;
+            }
+            shoppingCart.remove(product);
+            session.setAttribute("shoppingcart", shoppingCart);
+            resp.sendRedirect("/cart/show");
         }
-        shoppingCart.remove(product);
-        session.setAttribute("shoppingcart", shoppingCart);
-        resp.sendRedirect("/cart/show");
-
     }
 }

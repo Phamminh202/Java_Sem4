@@ -1,6 +1,7 @@
 package com.t2010a.javashopping.model;
 
 import com.t2010a.javashopping.entity.Product;
+import com.t2010a.javashopping.entity.ProductFilter;
 import com.t2010a.javashopping.entity.myenum.ProductStatus;
 import com.t2010a.javashopping.util.ConnectionHelper;
 
@@ -76,6 +77,121 @@ public class MySqlProductModel implements ProductModel{
             e.printStackTrace();
         }
         return list;
+    }
+
+    @Override
+    public List<Product> findAll(ProductFilter filter) {
+        List<Product> list = new ArrayList<>();
+        try {
+            Connection connection = ConnectionHelper.getConnection();
+            PreparedStatement preparedStatement = prepareQueryString(filter,connection);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                String id = resultSet.getString("id");
+                String name = resultSet.getString("name");
+                String image = resultSet.getString("image");
+                double price = resultSet.getDouble("price");
+                int qty = resultSet.getInt("qty");
+                int color_id = Integer.parseInt(resultSet.getString("color_id"));
+                String content = resultSet.getString("content");
+                int category_id = Integer.parseInt(resultSet.getString("category_id"));
+                LocalDateTime createdAt = LocalDateTime.ofInstant(resultSet.getTimestamp("createdAt").toInstant(), ZoneId.systemDefault());
+                LocalDateTime updatedAt = LocalDateTime.ofInstant(resultSet.getTimestamp("createdAt").toInstant(), ZoneId.systemDefault());
+                int intstatus = resultSet.getInt("status");
+                Product product = new Product(id,name,image,price,qty,color_id,content,category_id);
+                product.setCreatedAt(createdAt);
+                product.setUpdatedAt(updatedAt);
+                product.setStatus(ProductStatus.of(intstatus));
+                list.add(product);
+            }
+            preparedStatement.execute();
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    private PreparedStatement prepareQueryString(ProductFilter filter, Connection connection) {
+        List<Object> params = new ArrayList<>();
+        boolean isFirst = true;
+        StringBuilder sqlQueryBuider = new StringBuilder("select * from products");
+        if (filter.getCategory_id()!=0){
+            if (isFirst){
+                sqlQueryBuider.append(" where ");
+                isFirst = false;
+            }else {
+                sqlQueryBuider.append(" and ");
+            }
+            sqlQueryBuider.append("category_id = ?");
+            params.add(filter.getCategory_id());
+        }
+        if (filter.getColor_id()!=0){
+            if (isFirst){
+                sqlQueryBuider.append(" where ");
+                isFirst = false;
+            }else {
+                sqlQueryBuider.append(" and ");
+            }
+            sqlQueryBuider.append("color_id = ?");
+            params.add(filter.getColor_id());
+        }
+        if (filter.getMinPrice()!=0 && filter.getMaxPrice()!=0){
+            if (isFirst){
+                sqlQueryBuider.append(" where ");
+                isFirst = false;
+            }else {
+                sqlQueryBuider.append(" and ");
+            }
+            sqlQueryBuider.append("price >= ? and price <= ?");
+            params.add(filter.getMinPrice());
+            params.add(filter.getMaxPrice());
+        }
+        if (filter.getKeyword()!=null && filter.getKeyword().length()!=0){
+            if (isFirst){
+                sqlQueryBuider.append(" where ");
+                isFirst = false;
+            }else {
+                sqlQueryBuider.append(" and ");
+            }
+            sqlQueryBuider.append("name like ?");
+            params.add("%" + filter.getKeyword() + "%");
+        }
+        if (filter.getStatus()>=-2){
+            if (isFirst){
+                sqlQueryBuider.append(" where ");
+                isFirst = false;
+            }else {
+                sqlQueryBuider.append(" and ");
+            }
+            sqlQueryBuider.append("status = ?");
+            params.add(filter.getStatus());
+        }
+        sqlQueryBuider.append(" ");
+        sqlQueryBuider.append("limit ? ");
+        params.add(filter.getLimit());
+        sqlQueryBuider.append("offset ?");
+        params.add(filter.getPage());
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(sqlQueryBuider.toString());
+            for (int i = 0; i < params.size(); i++) {
+                    Object paramValue = params.get(i);
+                    if (paramValue!=null){
+                        if (paramValue instanceof String){
+                            preparedStatement.setString(i+1,(String) paramValue);
+                        } else if (paramValue instanceof Double) {
+                            preparedStatement.setDouble(i+1,(Double) paramValue);
+                        } else if (paramValue instanceof Integer) {
+                            preparedStatement.setInt(i+1,(Integer) paramValue);
+                        }
+                    }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        System.out.println(preparedStatement);
+        return preparedStatement;
     }
 
     @Override

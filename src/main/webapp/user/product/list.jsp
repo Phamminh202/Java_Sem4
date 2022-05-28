@@ -12,8 +12,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     List<Product> products = (List<Product>) request.getAttribute("product");
+    List<Category> categories = (List<Category>) request.getAttribute("category");
+    List<Color> colors = (List<Color>) request.getAttribute("color");
     if (products == null){
         products = new ArrayList<>();
+    }
+    if (categories == null){
+        categories = new ArrayList<>();
+    }
+    if (colors == null){
+        colors = new ArrayList<>();
     }
 %>
 <!doctype html>
@@ -34,6 +42,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
+                <form action="/shop"></form>
                 <div class="left_sidebar_area">
                     <aside class="left_widgets p_filter_widgets">
                         <div class="l_w_title">
@@ -47,26 +56,6 @@
                                 </li>
                                 <li>
                                     <a href="#">Dried Fish</a>
-                                    <span>(250)</span>
-                                </li>
-                                <li>
-                                    <a href="#">Fresh Fish</a>
-                                    <span>(250)</span>
-                                </li>
-                                <li>
-                                    <a href="#">Meat Alternatives</a>
-                                    <span>(250)</span>
-                                </li>
-                                <li>
-                                    <a href="#">Fresh Fish</a>
-                                    <span>(250)</span>
-                                </li>
-                                <li>
-                                    <a href="#">Meat Alternatives</a>
-                                    <span>(250)</span>
-                                </li>
-                                <li>
-                                    <a href="#">Meat</a>
                                     <span>(250)</span>
                                 </li>
                             </ul>
@@ -166,39 +155,38 @@
             <div class="col-lg-9">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="product_top_bar d-flex justify-content-between align-items-center">
-                            <div class="single_product_menu">
-                                <p><span>10000 </span> Prodict Found</p>
-                            </div>
-                            <div class="single_product_menu d-flex">
-                                <h5>short by : </h5>
-                                <select>
-                                    <option data-display="Select">name</option>
-                                    <option value="1">price</option>
-                                    <option value="2">product</option>
-                                </select>
-                            </div>
-                            <div class="single_product_menu d-flex">
-                                <h5>show :</h5>
-                                <div class="top_pageniation">
-                                    <ul>
-                                        <li>1</li>
-                                        <li>2</li>
-                                        <li>3</li>
-                                    </ul>
+                        <form action="/shop">
+                            <div class="product_top_bar d-flex justify-content-between align-items-center">
+                                <div class="single_product_menu d-flex">
+                                    <h5>Category : </h5>
+                                    <select name="category_id">
+                                        <%for (int i = 0; i < categories.size(); i++) {%>
+                                            <option value="<%=categories.get(i).getId()%>"><%=categories.get(i).getName()%></option>
+                                        <%}%>
+                                    </select>
                                 </div>
-                            </div>
-                            <div class="single_product_menu d-flex">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="search"
-                                           aria-describedby="inputGroupPrepend">
-                                    <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroupPrepend"><i
-                                                    class="ti-search"></i></span>
-                                    </div>
+                                <div class="single_product_menu d-flex">
+                                    <h5>Color : </h5>
+                                    <select name="color_id">
+                                        <%for (int i = 0; i < colors.size(); i++) {%>
+                                            <option value="<%=colors.get(i).getId()%>"><%=colors.get(i).getName()%></option>
+                                        <%}%>
+                                    </select>
                                 </div>
-                            </div>
+                                <div class="single_product_menu d-flex">
+                                    <h5>Limit : </h5>
+                                    <select name="limit">
+                                        <option data-display="Select">15</option>
+                                        <option value="20">20</option>
+                                        <option value="25">25</option>
+                                    </select>
+                                </div>
+
+                                <div class="single_product_menu d-flex">
+                                    <button type="submit">Find</button>
+                                </div>
                         </div>
+                        </form>
                     </div>
                 </div>
 

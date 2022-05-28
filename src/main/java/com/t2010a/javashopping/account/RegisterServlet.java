@@ -1,4 +1,4 @@
-package com.t2010a.javashopping.controller.account;
+package com.t2010a.javashopping.account;
 
 import com.t2010a.javashopping.entity.Account;
 import com.t2010a.javashopping.model.AccountModel;

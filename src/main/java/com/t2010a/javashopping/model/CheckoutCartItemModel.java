@@ -9,5 +9,5 @@ public interface CheckoutCartItemModel {
 
     List<CartItem> findAll();
 
-    CartItem findByShoppingCartId(int shoppingcartId);
+    List<CartItem> findByShoppingCartId(int shoppingcartId);
 }
